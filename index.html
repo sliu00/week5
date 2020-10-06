@@ -71,10 +71,6 @@
             img.setAttribute("width", "60");
             return img;
         }
-        var foo = document.getElementById("line");
-        for (var i = 0; i < 20; i++ ) {
-            foo.appendChild(generateImage());
-        }
 
         var HOTDOG_PRICE = 3.25;
         var FRIES_PRICE = 2.00;
@@ -85,6 +81,11 @@
         var sodas = prompt("How many sodas?", 1);
 
         var total = (hotdogs * HOTDOG_PRICE) + (fries * FRIES_PRICE) + (sodas * SODAS_PRICE);
+        
+        var foo = document.getElementById("line");
+        for (var i = 0; i < 20; i++ ) {
+            foo.appendChild(generateImage());
+        }
         
         document.write('<p id="hotdogs">' + "<b><i>#</i></b> Hotdogs: " + hotdogs + " at $" + HOTDOG_PRICE.toFixed(2) + " is $" + (hotdogs * HOTDOG_PRICE).toFixed(2) + '</p>');
         document.write('<p id="fries">' + "<b><i>#</i></b> Fries: " + fries + " at $" + FRIES_PRICE.toFixed(2) + " is $" + (fries * FRIES_PRICE).toFixed(2) + '</p>');
