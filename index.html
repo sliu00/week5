@@ -2,13 +2,80 @@
 <html>
     <head>
         <meta charset="utf-8"  />
+        <title>Joe's Hotdog Stand</title>
+        <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Press+Start+2P&family=Teko&display=swap" rel="stylesheet">
     </head>
+
+    <style>
+        body {
+            background-color: rgb(250, 236, 109);
+        }
+        h1 {
+            padding-top: 10px;
+            font-family: 'Bowlby One SC', cursive;
+            letter-spacing: 4px;
+            font-size: 40px;
+            text-align: center;
+            color: rgb(167, 51, 51);
+        }
+        
+        h2 {
+            font-size: 30px;
+           
+        }
+
+        #line {
+            transform: translateX(2vw);
+            overflow: hidden;
+        }
+
+        #hotdogs, #fries, #sodas {
+            font-size: 20px;
+        }
+
+        #sodas {
+            padding-bottom: 15px;
+            border-bottom: 4px solid rgb(0, 0, 0);
+            width: 30%;
+        }
+
+        #subtotal, #tax {
+            font-size: 20px;
+        }
+
+        #total {
+            font-size: 25px;
+        }
+
+        h2, #hotdogs, #fries, #sodas, #subtotal, #tax, #total, #discount {
+            padding-left: 10px;
+            font-family: 'Fjalla One', sans-serif;
+            letter-spacing: 1px;
+        }
+
+    </style>
 
     <body>
         <h1>Welcome to Joe's Hotdogs!</h1>
+        <div id="line"></div>
         <h2>Your Orders</h2>
     </body>
+
     <script type="text/javascript">
+        var imgSrc = 'hotdog.png';
+
+        function generateImage() {
+            var img = document.createElement('img')
+            img.src = imgSrc;
+            img.setAttribute("width", "60");
+            return img;
+        }
+        var foo = document.getElementById("line");
+        for (var i = 0; i < 20; i++ ) {
+            foo.appendChild(generateImage());
+        }
+
         var HOTDOG_PRICE = 3.25;
         var FRIES_PRICE = 2.00;
         var SODAS_PRICE = 1.50;
@@ -19,20 +86,20 @@
 
         var total = (hotdogs * HOTDOG_PRICE) + (fries * FRIES_PRICE) + (sodas * SODAS_PRICE);
         
-        document.write('<p id="hotdogs">' + "# Hotdogs: " + hotdogs + " at $" + HOTDOG_PRICE.toFixed(2) + " is $" + (hotdogs * HOTDOG_PRICE).toFixed(2) + '</p>');
-        document.write('<p id="fries">' + "# Fries: " + fries + " at $" + FRIES_PRICE.toFixed(2) + " is $" + (fries * FRIES_PRICE).toFixed(2) + '</p>');
-        document.write('<p id="hotdogs">' + "# Sodas: " + sodas + " at $" + SODAS_PRICE.toFixed(2) + " is $" + (sodas * SODAS_PRICE).toFixed(2) + '</p>');
+        document.write('<p id="hotdogs">' + "<b><i>#</i></b> Hotdogs: " + hotdogs + " at $" + HOTDOG_PRICE.toFixed(2) + " is $" + (hotdogs * HOTDOG_PRICE).toFixed(2) + '</p>');
+        document.write('<p id="fries">' + "<b><i>#</i></b> Fries: " + fries + " at $" + FRIES_PRICE.toFixed(2) + " is $" + (fries * FRIES_PRICE).toFixed(2) + '</p>');
+        document.write('<p id="sodas">' + "<b><i>#</i></b> Sodas: " + sodas + " at $" + SODAS_PRICE.toFixed(2) + " is $" + (sodas * SODAS_PRICE).toFixed(2) + '</p>');
 
 
         if (total >= 20) {
             total *= .90;
-            document.write('<p>' + "You qualified for our 10% discount" + '</p>')
+            document.write('<p id="discount">' + "<i>You qualified for our 10% discount</i>" + '</p>')
         }
 
         var tax = total * .0625;
 
-        document.write('<p>' + "Subtotal: $" + total.toFixed(2) + '</p>');
-        document.write('<p>' + "Meals Tax: $" + tax.toFixed(2) + '</p>');
-        document.write('<p>' + "Total: $" + (total + tax).toFixed(2) + '</p>');
+        document.write('<p id="subtotal">' + "Subtotal: $" + total.toFixed(2) + '</p>');
+        document.write('<p id="tax">' + "Meals Tax: $" + tax.toFixed(2) + '</p>');
+        document.write('<p id="total">' + "<b>Total</b>: $" + (total + tax).toFixed(2) + '</p>');
     </script>
 </html>
