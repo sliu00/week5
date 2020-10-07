@@ -2,23 +2,134 @@
 <html>
     <head>
         <meta charset="utf-8"  />
+        <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Press+Start+2P&family=Teko&display=swap" rel="stylesheet">
+
         <title>Quick Pick</title>
     </head>
 
     <style>
+        body {
+            background-color: rgb(202, 220, 255);
+            margin: 0%;
+        }
 
+        .header {
+            background-color: royalblue;
+         
+        }
+    
     </style>
 
-    <body>
-        
+    <body> 
+        <div class="header">
+            <img src="lottery.png" width="20%">
+        </div>
     </body>
 
     <script type="text/javascript">
-        var nums = new Array()
+        //Get the winning numbers and sort
+        var quickPickNums = new Array()
         for (var i = 0; i < 5; ++i) {
             //numbers (1->48)
-            nums.push((Math.random() * 48) + 1)
-            document.write(nums[i].toFixed(0) + "<br>")
+            quickPickNums.push((Math.random() * 48) + 1)
         }
+        quickPickNums.sort(function(a, b) {
+            return a - b
+        })
+
+        //Winning lucky ball
+        var luckyBallNum = (Math.random() * 18) + 1
+
+        //Get the users quick picks and sort
+        var quickPicks = prompt("Enter 5 winning numbers separated by a space", "11 27 31 2 9").split(" ")
+        quickPicks.sort(function(a, b) {
+            return a - b
+        })
+
+        //Get the users winning ball 
+        var luckyBall = prompt("Enter lucky ball number", "3")
+
+        
+        //Print the numbers
+        document.write("Your quick pick numbers are: ")
+        for (var i = 0; i < 5; ++i) {
+            document.write(quickPicks[i] + "&nbsp;")
+        } 
+        document.write("<div> Your lucky ball number is " + luckyBall + "</div>")
+
+        document.write("The winning numbers are: ")
+        for (var i = 0; i < 5; ++i) {
+            document.write(quickPickNums[i].toFixed(0) + "&nbsp;")
+        }
+        document.write("<br>The lucky ball number is " + luckyBallNum.toFixed(0));
+
+        //Count how many quick picks match
+        var count = 0;
+        for (var i = 0; i < 5; ++i) {
+            if (quickPicks.includes(quickPickNums[i].toFixed(0))) {
+                ++count
+            }
+        }
+        
+        var lucky = false;
+        var payout;
+        
+        //Check if the winning ball matches the users
+        if (luckyBall == luckyBallNum.toFixed(0)) {
+            lucky = true;
+        } 
+       
+        //Payout for matching quick picks/winning ball
+        switch (count) {
+            case 5: 
+                if (lucky) {
+                    payout = "$7,000 a WEEK for LIFE"
+                } else {
+                    payout = "$25,000 a YEAR for LIFE"
+                }
+                break;
+            case 4:
+                if (lucky) {
+                    payout = "$5,000"
+                } else {
+                    payout = "$200"
+                }
+                
+                break;
+            case 3:
+                if (lucky) {
+                    payout = "$150"
+                } else {
+                    payout = "$20"
+                }
+                break;
+            case 2:
+                if (lucky) {
+                    payout = "$25"
+                } else {
+                    payout = "$3"
+                }
+                break;
+            case 1:
+                if (lucky) {
+                    payout = "$6"
+                } else {
+                    payout = "$0"
+                }
+                break;
+            case 0:
+                if (lucky) {
+                    payout = "$4"
+                } else {
+                    payout = "$0"
+                }
+                break;
+        }
+        if (payout != "$0") {
+            document.write("<br>You Win! Your Payout is: " + payout)
+        } else {
+            document.write("<br> Sorry, you didn't win anything!")
+        }
+       
     </script>
 </html>
