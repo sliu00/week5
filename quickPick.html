@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8"  />
         <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Press+Start+2P&family=Teko&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 
         <title>Quick Pick</title>
     </head>
@@ -14,16 +15,45 @@
         }
 
         .header {
-            background-color: royalblue;
-         
+            background-color: rgb(133, 162, 250);
+            padding: 20px;
+            display: flex;
         }
-    
+        
+        #gameTitle {
+            text-align: center;
+            font-family: 'Fjalla One', sans-serif;
+            font-size: 50px;
+            color: rgb(255, 255, 255);
+            flex: 1;
+            transform: translateX(-8vw);
+            letter-spacing: 5px;
+        }
+        .content {
+            padding: 10px;
+        }
+        #userInput, #winnignNums, #results, #payout {
+            padding: 15px;
+            line-height: 5vh;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 20px;
+        }
+
+
     </style>
 
     <body> 
         <div class="header">
-            <img src="lottery.png" width="20%">
+            <img src="lottery.png" width="17%">
+            <text id="gameTitle"> Lucky For Life </text>
         </div>
+        <div class="content">
+            <div id="userInput"></div>
+            <div id="winningNums"></div>
+            <div id="results"></div>
+            <div id="payout"></div>
+        </div>
+        
     </body>
 
     <script type="text/javascript">
@@ -51,17 +81,19 @@
 
         
         //Print the numbers
-        document.write("Your quick pick numbers are: ")
+        document.getElementById('userInput').innerHTML = "Your quick pick numbers are: "
+       
         for (var i = 0; i < 5; ++i) {
-            document.write(quickPicks[i] + "&nbsp;")
+            document.getElementById('userInput').innerHTML += ("<span style='font-size: 20px'><b>" + quickPicks[i] + "<b/></span>" + "&nbsp;")
         } 
-        document.write("<div> Your lucky ball number is " + luckyBall + "</div>")
 
-        document.write("The winning numbers are: ")
+        document.getElementById('userInput').innerHTML += ("<br> Your lucky ball number is " + "<span style='font-size: 20px'><b>" + luckyBall + "</b></span>")
+
+        document.getElementById('userInput').innerHTML += ("<br> The winning numbers are: ")
         for (var i = 0; i < 5; ++i) {
-            document.write(quickPickNums[i].toFixed(0) + "&nbsp;")
+            document.getElementById('userInput').innerHTML += ("<span style='font-size: 20px'><b>" + quickPickNums[i].toFixed(0) + "</span>" + "&nbsp;")
         }
-        document.write("<br>The lucky ball number is " + luckyBallNum.toFixed(0));
+        document.getElementById('userInput').innerHTML += ("<br>The lucky ball number is " + "<span style='font-size: 20px'><b>" + luckyBallNum.toFixed(0) + "</b></span>");
 
         //Count how many quick picks match
         var count = 0;
@@ -70,6 +102,7 @@
                 ++count
             }
         }
+        document.getElementById('results').innerHTML = (count + " number(s) matched the winning numbers. ")
         
         var lucky = false;
         var payout;
@@ -78,7 +111,8 @@
         if (luckyBall == luckyBallNum.toFixed(0)) {
             lucky = true;
         } 
-       
+        
+        lucky ? document.getElementById('results').innerHTML += "The lucky ball number matched!" : document.getElementById('results').innerHTML += "The lucky ball number did NOT match!"
         //Payout for matching quick picks/winning ball
         switch (count) {
             case 5: 
@@ -126,9 +160,9 @@
                 break;
         }
         if (payout != "$0") {
-            document.write("<br>You Win! Your Payout is: " + payout)
+            document.getElementById('payout').innerHTML += ("<br><span style='color: rgb(83, 163, 83); font-size: 20px'><b>You Win! Your Payout is: " + payout + "</b></span>")
         } else {
-            document.write("<br> Sorry, you didn't win anything!")
+            document.getElementById('payout').innerHTML += ("<span style='color: rgb(230, 73, 73); font-size: 20px'><b> Sorry, you didn't win anything! </b></span>")
         }
        
     </script>
